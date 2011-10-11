@@ -1,0 +1,26 @@
+CREATE TABLE blog_posts (
+  post_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  title VARCHAR(100) NOT NULL,
+  body TEXT NOT NULL,
+  create_ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (post_id)
+);
+
+CREATE TABLE images (
+  image_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  post_id INTEGER UNSIGNED NOT NULL,
+  image_path VARCHAR(200) NOT NULL,
+
+  PRIMARY KEY (image_id),
+  FOREIGN KEY (post_id) REFERENCES blog_posts(post_id)
+);
+
+CREATE TABLE pending (
+  pending_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  message_id INTEGER UNSIGNED NOT NULL,
+  token CHAR(32) NOT NULL,
+  is_valid ENUM('Y','N') DEFAULT 'N',
+
+  PRIMARY KEY (pending_id)
+);
